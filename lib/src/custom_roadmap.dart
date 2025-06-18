@@ -4,10 +4,16 @@ import 'package:flutter_roadmap/src/model/model.dart';
 import 'widgets/widgets.dart';
 
 class RoadMap extends StatelessWidget {
-  const RoadMap({super.key, required this.pointerRadius, required this.values});
+  const RoadMap({
+    super.key,
+    required this.pointerRadius,
+    required this.values,
+    this.isStraight = false,
+  });
 
   final double pointerRadius;
   final List<StepValue> values;
+  final bool isStraight;
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +40,29 @@ class RoadMap extends StatelessWidget {
               ),
             ),
           ),
-          ...List<Widget>.generate(
-            values.length - 1,
-            (int i) => Positioned(
-              top: pointerRadius * (2 + (4 * i)) + pointerRadius,
-              left: i.isEven ? center.dx + pointerRadius * 2 + 5 : center.dx,
-              child: CustomPaint(
-                painter:
-                    ConnectedLine(radius: pointerRadius * 2, isLeft: i.isEven),
+          if (!isStraight)
+            ...List<Widget>.generate(
+              values.length - 1,
+              (int i) => Positioned(
+                top: pointerRadius * (2 + (4 * i)) + pointerRadius,
+                left: i.isEven ? center.dx + pointerRadius * 2 + 5 : center.dx,
+                child: CustomPaint(
+                  painter: CurveConnectedLine(
+                      radius: pointerRadius * 2, isLeft: i.isEven),
+                ),
+              ),
+            )
+          else
+            ...List<Widget>.generate(
+              values.length - 1,
+              (int i) => Positioned(
+                top: pointerRadius * (2 + (4 * i)),
+                left: center.dx + pointerRadius,
+                child: CustomPaint(
+                  painter: StraightConnectedLine(pointerRadius * 2 - 5),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );

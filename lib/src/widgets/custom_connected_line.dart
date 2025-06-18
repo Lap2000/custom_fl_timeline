@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class ConnectedLine extends CustomPainter {
-  const ConnectedLine({
+class CurveConnectedLine extends CustomPainter {
+  const CurveConnectedLine({
     required this.radius,
     this.isLeft = true,
   });
@@ -18,27 +18,7 @@ class ConnectedLine extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    // final Offset startingPoint = Offset(0, size.height / 2);
-    // final Offset endingPoint = Offset(size.width, size.height / 2);
-
-    final Offset circleOffset = Offset(size.width / 2, size.height / 2);
-
     final Offset center = Offset(size.width / 2, size.height / 2);
-    final double centerWidth = size.width / 2;
-
-    // double startX = 0;
-    // const double dashLength = 5;
-    // const double dashGap = 8;
-
-    // final double y = size.height / 2;
-
-    // while (startX < size.width) {
-    //   final double endX = (startX + dashLength).clamp(0, size.width);
-    //   if (startX < centerWidth - radius || startX > centerWidth + radius) {
-    //     canvas.drawLine(Offset(startX, y), Offset(endX, y), paint);
-    //   }
-    //   startX += dashLength + dashGap;
-    // }
 
     double startAngle = isLeft ? -pi / 2 : pi / 2;
 
@@ -67,6 +47,54 @@ class ConnectedLine extends CustomPainter {
         startAngle += circleLengthGap + circleLengthGap;
       }
     }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+class StraightConnectedLine extends CustomPainter {
+  const StraightConnectedLine(this.radius);
+
+  final double radius;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    double startY = 2;
+    const double dashLength = 5;
+    const double dashGap = 5;
+
+    final double x = 2.5;
+
+    while (startY < radius) {
+      final double endY = startY + dashLength;
+      if (startY < radius || startY > radius) {
+        canvas.drawLine(Offset(x, startY), Offset(x, endY), paint);
+      }
+      startY += dashLength + dashGap;
+    }
+
+    final double arrowSize = 5.0;
+    final Offset arrowTip = Offset(x, startY); // endArrowPoint
+
+    final Offset arrowLeft = Offset(
+      x - arrowSize / 2,
+      startY - arrowSize - 5,
+    );
+    final Offset arrowRight = Offset(
+      x + arrowSize / 2,
+      startY - arrowSize - 5,
+    );
+
+    canvas.drawLine(arrowTip, arrowLeft, paint);
+    canvas.drawLine(arrowTip, arrowRight, paint);
   }
 
   @override
