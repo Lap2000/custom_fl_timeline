@@ -1,4 +1,5 @@
-import 'package:example/pages/demo_roadmap.dart';
+import 'package:example/pages/demo_curve_roadmap.dart';
+import 'package:example/pages/demo_straight_roadmap.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -38,14 +39,25 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<dynamic>(
-                      builder: (_) => const DemoRoadmap(),
-                    ),
-                  );
-                },
-                child: const Text('Roadmap'))
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<dynamic>(
+                    builder: (_) => const DemoCurveRoadmap(),
+                  ),
+                );
+              },
+              child: const Text('Curve Roadmap'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<dynamic>(
+                    builder: (_) => const DemoStraightRoadmap(),
+                  ),
+                );
+              },
+              child: const Text('Straight Roadmap'),
+            ),
           ],
         ),
       ),
