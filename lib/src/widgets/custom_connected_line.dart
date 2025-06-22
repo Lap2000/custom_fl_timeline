@@ -95,20 +95,30 @@ class CurveConnectedLine extends CustomPainter {
 
 class StraightConnectedLine extends CustomPainter {
   const StraightConnectedLine({
-    this.radius = 25,
+    this.lineLength,
     this.roadmapOrientation = RoadMapOrientation.horizontal,
     this.color = Colors.black,
     this.strokeWidth = 2,
     this.dashGap = 5,
     this.dashLength = 5,
+    this.hasArrow = true,
+    this.horizontalX = 2.5,
+    this.horizontalY = 2,
+    this.type = ConnectedLineType.solid,
+    this.limitExpand = 0,
   });
 
-  final double radius;
+  final double? lineLength;
   final RoadMapOrientation roadmapOrientation;
   final Color color;
   final double strokeWidth;
   final double dashGap;
   final double dashLength;
+  final bool hasArrow;
+  final double horizontalX;
+  final double horizontalY;
+  final ConnectedLineType type;
+  final double limitExpand;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -117,60 +127,78 @@ class StraightConnectedLine extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
+    final limit = lineLength ??
+        (roadmapOrientation.isVertical ? size.width : size.height) +
+            (type.isSolid ? 0 : limitExpand);
+
     if (roadmapOrientation.isVertical) {
       double startX = 0;
 
       final double y = 0;
 
-      while (startX < radius) {
-        final double endX = startX + dashLength;
-        if (startX < radius || startX > radius) {
-          canvas.drawLine(Offset(startX, y), Offset(endX, y), paint);
+      if (type.isSolid) {
+        canvas.drawLine(Offset(startX, y), Offset(limit + 5, y), paint);
+        startX = limit + 5;
+      } else {
+        while (startX < limit) {
+          final double endX = startX + dashLength;
+          if (startX < limit || startX > limit) {
+            canvas.drawLine(Offset(startX, y), Offset(endX, y), paint);
+          }
+          startX += dashLength + dashGap;
         }
-        startX += dashLength + dashGap;
       }
 
-      final double arrowSize = 5.0;
-      final Offset arrowTip = Offset(startX, y); // endArrowPoint
+      if (hasArrow) {
+        final double arrowSize = 5.0;
+        final Offset arrowTip = Offset(startX, y); // endArrowPoint
 
-      final Offset arrowTop = Offset(
-        startX - arrowSize - 5,
-        y - arrowSize / 2,
-      );
-      final Offset arrowBottom = Offset(
-        startX - arrowSize - 5,
-        y + arrowSize / 2,
-      );
+        final Offset arrowTop = Offset(
+          startX - arrowSize - 5,
+          y - arrowSize / 2,
+        );
+        final Offset arrowBottom = Offset(
+          startX - arrowSize - 5,
+          y + arrowSize / 2,
+        );
 
-      canvas.drawLine(arrowTip, arrowTop, paint);
-      canvas.drawLine(arrowTip, arrowBottom, paint);
+        canvas.drawLine(arrowTip, arrowTop, paint);
+        canvas.drawLine(arrowTip, arrowBottom, paint);
+      }
     } else {
-      double startY = 2;
+      double startY = horizontalY;
 
-      final double x = 2.5;
+      final double x = horizontalX;
 
-      while (startY < radius) {
-        final double endY = startY + dashLength;
-        if (startY < radius || startY > radius) {
-          canvas.drawLine(Offset(x, startY), Offset(x, endY), paint);
+      if (type.isSolid) {
+        canvas.drawLine(Offset(x, startY), Offset(x, limit + 7.5), paint);
+        startY = limit + 7.5;
+      } else {
+        while (startY < limit) {
+          final double endY = startY + dashLength;
+          if (startY < limit || startY > limit) {
+            canvas.drawLine(Offset(x, startY), Offset(x, endY), paint);
+          }
+          startY += dashLength + dashGap;
         }
-        startY += dashLength + dashGap;
       }
 
-      final double arrowSize = 5.0;
-      final Offset arrowTip = Offset(x, startY); // endArrowPoint
+      if (hasArrow) {
+        final double arrowSize = 5.0;
+        final Offset arrowTip = Offset(x, startY); // endArrowPoint
 
-      final Offset arrowLeft = Offset(
-        x - arrowSize / 2,
-        startY - arrowSize - 5,
-      );
-      final Offset arrowRight = Offset(
-        x + arrowSize / 2,
-        startY - arrowSize - 5,
-      );
+        final Offset arrowLeft = Offset(
+          x - arrowSize / 2,
+          startY - arrowSize - 5,
+        );
+        final Offset arrowRight = Offset(
+          x + arrowSize / 2,
+          startY - arrowSize - 5,
+        );
 
-      canvas.drawLine(arrowTip, arrowLeft, paint);
-      canvas.drawLine(arrowTip, arrowRight, paint);
+        canvas.drawLine(arrowTip, arrowLeft, paint);
+        canvas.drawLine(arrowTip, arrowRight, paint);
+      }
     }
   }
 

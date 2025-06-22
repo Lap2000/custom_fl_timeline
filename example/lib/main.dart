@@ -1,4 +1,5 @@
 import 'package:example/pages/demo_curve_roadmap.dart';
+import 'package:example/pages/demo_custom_roadmap.dart';
 import 'package:example/pages/demo_straight_roadmap.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,16 @@ class MyHomePage extends StatelessWidget {
                 );
               },
               child: const Text('Straight Roadmap'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<dynamic>(
+                    builder: (_) => const DemoCustomRoadmap(),
+                  ),
+                );
+              },
+              child: const Text('Custom Roadmap'),
             ),
           ],
         ),

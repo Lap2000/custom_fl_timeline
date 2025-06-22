@@ -13,24 +13,13 @@ class DemoStraightRoadmap extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              RoadMap(
-                circleRadius: 30,
-                roadmapType: RoadmapType.straight,
-                values: <StepValue>[
-                  StepValue('A', color: Colors.orangeAccent),
-                  StepValue('B', color: Colors.greenAccent),
-                  StepValue('C', color: Colors.yellowAccent),
-                  StepValue('D', color: Colors.redAccent),
-                  StepValue('E', color: Colors.blueAccent),
-                ],
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+              Container(
+                color: Colors.purpleAccent,
                 child: RoadMap(
-                  circleRadius: 60,
+                  circleRadius: 30,
                   roadmapType: RoadmapType.straight,
-                  roadmapOrientation: RoadMapOrientation.vertical,
                   values: <StepValue>[
                     StepValue('A', color: Colors.orangeAccent),
                     StepValue('B', color: Colors.greenAccent),
@@ -38,6 +27,24 @@ class DemoStraightRoadmap extends StatelessWidget {
                     StepValue('D', color: Colors.redAccent),
                     StepValue('E', color: Colors.blueAccent),
                   ],
+                ),
+              ),
+              Container(
+                color: Colors.pinkAccent,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: RoadMap(
+                    circleRadius: 40,
+                    roadmapType: RoadmapType.straight,
+                    roadmapOrientation: RoadMapOrientation.vertical,
+                    values: <StepValue>[
+                      StepValue('A', color: Colors.orangeAccent),
+                      StepValue('B', color: Colors.greenAccent),
+                      StepValue('C', color: Colors.yellowAccent),
+                      StepValue('D', color: Colors.redAccent),
+                      StepValue('E', color: Colors.blueAccent),
+                    ],
+                  ),
                 ),
               ),
             ],

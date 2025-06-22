@@ -10,6 +10,8 @@ class CustomStepRoadmap extends StatelessWidget {
     this.textStyle,
     this.child,
     this.filledColor,
+    this.pixelPadding = 5,
+    this.padding = const EdgeInsets.all(8),
   });
 
   final double radius;
@@ -17,13 +19,15 @@ class CustomStepRoadmap extends StatelessWidget {
   final TextStyle? textStyle;
   final Widget? child;
   final Color? filledColor;
+  final double pixelPadding;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: radius * 2 + 5,
-      width: radius * 2 + 5,
-      padding: const EdgeInsets.all(8),
+      height: radius * 2 + pixelPadding,
+      width: radius * 2 + pixelPadding,
+      padding: padding,
       alignment: Alignment.center,
       child: Stack(
         children: <Widget>[
