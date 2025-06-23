@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_roadmap/src/helper/enums/enums.dart';
-import 'package:flutter_roadmap/src/model/model.dart';
+import 'helper/enums/enums.dart';
+import 'model/model.dart';
 
 import 'widgets/widgets.dart';
 

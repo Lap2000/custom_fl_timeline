@@ -127,14 +127,14 @@ class StraightConnectedLine extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    final limit = lineLength ??
+    final double limit = lineLength ??
         (roadmapOrientation.isVertical ? size.width : size.height) +
             (type.isSolid ? 0 : limitExpand);
 
     if (roadmapOrientation.isVertical) {
       double startX = 0;
 
-      final double y = 0;
+      const double y = 0;
 
       if (type.isSolid) {
         canvas.drawLine(Offset(startX, y), Offset(limit + 5, y), paint);
@@ -150,7 +150,7 @@ class StraightConnectedLine extends CustomPainter {
       }
 
       if (hasArrow) {
-        final double arrowSize = 5.0;
+        const double arrowSize = 5.0;
         final Offset arrowTip = Offset(startX, y); // endArrowPoint
 
         final Offset arrowTop = Offset(
@@ -184,7 +184,7 @@ class StraightConnectedLine extends CustomPainter {
       }
 
       if (hasArrow) {
-        final double arrowSize = 5.0;
+        const double arrowSize = 5.0;
         final Offset arrowTip = Offset(x, startY); // endArrowPoint
 
         final Offset arrowLeft = Offset(

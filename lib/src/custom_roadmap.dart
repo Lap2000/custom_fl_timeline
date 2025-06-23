@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_roadmap/src/helper/enums/enums.dart';
-import 'package:flutter_roadmap/src/model/model.dart';
+import 'helper/enums/enums.dart';
+import 'model/model.dart';
 
 import 'widgets/widgets.dart';
 
@@ -24,7 +24,7 @@ class CustomRoadMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<StepValue> milestoneList = [
+    final List<StepValue> milestoneList = <StepValue>[
       StepValue('Đặt hàng', time: DateTime.now()),
       StepValue('Chờ lấy hàng', time: DateTime.now()),
       StepValue(
@@ -33,14 +33,27 @@ class CustomRoadMap extends StatelessWidget {
       StepValue('Giao hàng thành công', time: DateTime.now()),
     ];
     return Column(
-      children: [
+      children: <Widget>[
         Expanded(
           child: ListView.builder(
             itemCount: milestoneList.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (BuildContext context, int index) {
               return CustomMilestone(
-                text: milestoneList[index].value,
+                item: milestoneList[index],
                 circleAtTheEnd: index == milestoneList.length - 1,
+                isActivated: index == 0,
+                children: <Widget>[
+                  if (index == 0)
+                    InkWell(
+                      onTap: () {}, // TODO(lappd): handle onTap.
+                      child: const Text(
+                        'Xem hình ảnh',
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      ),
+                    )
+                ],
               );
             },
           ),
