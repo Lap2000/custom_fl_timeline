@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_timeline/flutter_timeline.dart';
+import 'package:custom_fl_timeline/custom_fl_timeline.dart';
 
 class DemoCustomTimeline extends StatelessWidget {
   const DemoCustomTimeline({super.key});
