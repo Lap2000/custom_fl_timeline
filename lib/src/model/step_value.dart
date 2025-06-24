@@ -1,12 +1,26 @@
-import 'dart:ui';
+import 'package:flutter/widgets.dart';
 
 class StepValue {
   StepValue(
     this.value, {
     this.color,
     this.time,
+    this.isActivated = false,
+    this.extraValue = const <Widget>[],
   });
+
+  /// Value of milestone
   final String value;
+
+  /// Value of milestone
+  final bool isActivated;
+
+  /// Color
   final Color? color;
+
+  /// Datetime
   final DateTime? time;
+
+  /// Widgets below value
+  final List<Widget> extraValue;
 }
