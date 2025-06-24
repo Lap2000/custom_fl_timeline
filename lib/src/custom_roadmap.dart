@@ -4,13 +4,31 @@ import 'model/model.dart';
 
 import 'widgets/widgets.dart';
 
+/// Widget inside milestone.
+/// Ex: Done icon
+typedef ChildMilestoneBuilder = Widget? Function(
+    BuildContext context, int index);
+
+/// Widget below main value.
+/// Ex: TextButton -> View Image
+typedef ExtraWidgetBuilder = List<Widget> Function(
+    BuildContext context, int index);
+
+/// Widget main value.
+/// Ex: Text
+typedef ChildBuilder = Widget Function(BuildContext context, int index);
+
+/// DateTime Widget.
+/// Ex: Text
+typedef DateTimeChildBuilder = Widget Function(BuildContext context, int index);
+
 class CustomRoadMap extends StatelessWidget {
   const CustomRoadMap({
     super.key,
-    this.circleRadius = 5,
+    this.circleRadius = 10,
     required this.values,
     this.padding = const EdgeInsets.all(8.0),
-    this.connectedLineType = ConnectedLineType.solid,
+    this.connectedLineType = ConnectorType.solid,
     this.isShowDateTime = true,
     this.datetimeLocale,
     this.itemPadding = 20,
@@ -22,6 +40,10 @@ class CustomRoadMap extends StatelessWidget {
     this.flex = const <int>[2, 5],
     this.textStyle = const TextStyle(),
     this.datetimeTextStyle = const TextStyle(),
+    this.childMilestoneBuilder,
+    this.extraWidgetBuilder,
+    this.childBuilder,
+    this.dateTimeChildBuilder,
   });
 
   /// circle roadmap radius
@@ -34,7 +56,7 @@ class CustomRoadMap extends StatelessWidget {
   final EdgeInsets padding;
 
   /// Connected Line Type (solid, dash)
-  final ConnectedLineType connectedLineType;
+  final ConnectorType connectedLineType;
 
   /// Enable/Disable DateTime
   final bool isShowDateTime;
@@ -70,6 +92,22 @@ class CustomRoadMap extends StatelessWidget {
   /// Note: FittedBox in 1 line.
   final TextStyle datetimeTextStyle;
 
+  /// Widget inside milestone.
+  /// Ex: Done icon
+  final ChildMilestoneBuilder? childMilestoneBuilder;
+
+  /// Widget below main value.
+  /// Ex: TextButton -> View Image
+  final ExtraWidgetBuilder? extraWidgetBuilder;
+
+  /// Widget below main value.
+  /// Manually custom
+  final ChildBuilder? childBuilder;
+
+  /// DateTime.
+  /// Manually custom
+  final DateTimeChildBuilder? dateTimeChildBuilder;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -84,7 +122,7 @@ class CustomRoadMap extends StatelessWidget {
                   item: values[index],
                   circleAtTheEnd: index == values.length - 1,
                   isActivated: values[index].isActivated,
-                  connectedLineType: ConnectedLineType.solid,
+                  connectorType: ConnectorType.solid,
                   isShowDateTime: isShowDateTime,
                   datetimeLocale: datetimeLocale,
                   formattedStyle: formattedStyle,
@@ -97,7 +135,11 @@ class CustomRoadMap extends StatelessWidget {
                   itemPadding: itemPadding,
                   linePadding: linePadding,
                   circleRadius: circleRadius,
-                  children: values[index].extraValue,
+                  milestoneChild: childMilestoneBuilder?.call(context, index),
+                  children: extraWidgetBuilder?.call(context, index) ??
+                      const <Widget>[],
+                  child: childBuilder?.call(context, index),
+                  datetimeChild: dateTimeChildBuilder?.call(context, index),
                 );
               },
             ),

@@ -6,7 +6,6 @@ class StepValue {
     this.color,
     this.time,
     this.isActivated = false,
-    this.extraValue = const <Widget>[],
   });
 
   /// Value of milestone
@@ -20,7 +19,4 @@ class StepValue {
 
   /// Datetime
   final DateTime? time;
-
-  /// Widgets below value
-  final List<Widget> extraValue;
 }

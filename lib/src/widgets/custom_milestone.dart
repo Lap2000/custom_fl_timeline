@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../flutter_roadmap.dart';
@@ -9,7 +7,7 @@ class CustomMilestone extends StatelessWidget {
   const CustomMilestone({
     super.key,
     required this.item,
-    required this.connectedLineType,
+    required this.connectorType,
     required this.isShowDateTime,
     required this.itemPadding,
     required this.linePadding,
@@ -25,6 +23,9 @@ class CustomMilestone extends StatelessWidget {
     this.children = const <Widget>[],
     this.circleAtTheEnd = false,
     this.isActivated = false,
+    this.milestoneChild,
+    this.datetimeChild,
+    this.child,
   }) : assert(flex.length == 2, 'List "flex" must contain exactly 2 elements');
 
   /// Item Model -> Value
@@ -61,7 +62,7 @@ class CustomMilestone extends StatelessWidget {
   final double circleRadius;
 
   /// Connected Line Type (solid, dash)
-  final ConnectedLineType connectedLineType;
+  final ConnectorType connectorType;
 
   /// Flex (datetime - value)
   final List<int> flex;
@@ -77,6 +78,15 @@ class CustomMilestone extends StatelessWidget {
 
   /// Datetime TextStyle - (without color)
   final TextStyle datetimeTextStyle;
+
+  /// Widget insides milestone.
+  final Widget? milestoneChild;
+
+  /// Widget in the right of milestone.
+  final Widget? child;
+
+  /// Widget in the left of milestone.
+  final Widget? datetimeChild;
 
   @override
   Widget build(BuildContext context) {
@@ -100,19 +110,20 @@ class CustomMilestone extends StatelessWidget {
               flex: flex.first,
 
               /// DateTime
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  OneLineText(
-                    formatted.split(' ').first,
-                    style: datetimeStrStyle,
+              child: datetimeChild ??
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      OneLineText(
+                        formatted.split(' ').first,
+                        style: datetimeStrStyle,
+                      ),
+                      OneLineText(
+                        formatted.split(' ').last,
+                        style: datetimeStrStyle,
+                      ),
+                    ],
                   ),
-                  OneLineText(
-                    formatted.split(' ').last,
-                    style: datetimeStrStyle,
-                  ),
-                ],
-              ),
             ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: linePadding),
@@ -122,35 +133,47 @@ class CustomMilestone extends StatelessWidget {
                 CustomStepRoadmap(
                   radius: circleRadius,
                   filledColor: isActivated ? activatedColor : deactivatedColor,
-                  pixelPadding: 0,
-                  padding: EdgeInsets.only(
-                    top: max(
-                      0,
-                      15 -
-                          (circleRadius < 5
-                              ? max(8, circleRadius)
-                              : circleRadius),
-                    ),
-                  ),
+                  // pixelPadding: 0,
+                  // padding: EdgeInsets.only(
+                  //   top: max(
+                  //     0,
+                  //     15 -
+                  //         (circleRadius < 5
+                  //             ? max(8, circleRadius)
+                  //             : circleRadius),
+                  //   ),
+                  // ),
+                  child: milestoneChild,
                 ),
+                // Container(
+                //   width: 15,
+                //   height: 15,
+                //   decoration: BoxDecoration(
+                //     color: Colors.blue,
+                //     shape: BoxShape.circle,
+                //     border: Border.all(
+                //       color: Colors.red,
+                //     ),
+                //   ),
+                //   child: const Center(
+                //     child: Icon(
+                //       Icons.done,
+                //       color: Colors.white,
+                //       size: 10,
+                //     ),
+                //   ),
+                // ),
 
                 /// if is the last, not show the line.
                 if (!circleAtTheEnd)
                   Expanded(
                     child: CustomPaint(
-                      painter: StraightConnectedLine(
+                      painter: StraightConnector(
                         hasArrow: false,
-                        horizontalX: 0,
-                        horizontalY: max(
-                            0,
-                            circleRadius < 5
-                                ? circleRadius
-                                : (10 - circleRadius)),
                         color: deactivatedColor,
-                        type: connectedLineType,
+                        type: connectorType,
                         dashGap: 1,
                         dashLength: 2,
-                        limitExpand: 10,
                       ),
                     ),
                   ),
@@ -167,11 +190,12 @@ class CustomMilestone extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   /// Main value.
-                  Text(
-                    item.value,
-                    style: valueStyle,
-                    // softWrap: true,
-                  ),
+
+                  child ??
+                      Text(
+                        item.value,
+                        style: valueStyle,
+                      ),
 
                   /// extra widgets here.
                   ...children,

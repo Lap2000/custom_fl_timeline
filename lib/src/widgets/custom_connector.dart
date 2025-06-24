@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../helper/helper.dart';
 
-class CurveConnectedLine extends CustomPainter {
-  const CurveConnectedLine({
+class CurveConnector extends CustomPainter {
+  const CurveConnector({
     this.radius = 25,
     this.curveConnectedLineType = CurveConnectedLineType.left,
     this.roadmapOrientation = RoadMapOrientation.horizontal,
@@ -93,32 +93,26 @@ class CurveConnectedLine extends CustomPainter {
   }
 }
 
-class StraightConnectedLine extends CustomPainter {
-  const StraightConnectedLine({
-    this.lineLength,
+class StraightConnector extends CustomPainter {
+  const StraightConnector({
     this.roadmapOrientation = RoadMapOrientation.horizontal,
     this.color = Colors.black,
     this.strokeWidth = 2,
     this.dashGap = 5,
     this.dashLength = 5,
     this.hasArrow = true,
-    this.horizontalX = 2.5,
-    this.horizontalY = 2,
-    this.type = ConnectedLineType.solid,
-    this.limitExpand = 0,
+    this.type = ConnectorType.solid,
+    this.length,
   });
 
-  final double? lineLength;
   final RoadMapOrientation roadmapOrientation;
   final Color color;
   final double strokeWidth;
   final double dashGap;
   final double dashLength;
   final bool hasArrow;
-  final double horizontalX;
-  final double horizontalY;
-  final ConnectedLineType type;
-  final double limitExpand;
+  final ConnectorType type;
+  final double? length;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -127,9 +121,8 @@ class StraightConnectedLine extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    final double limit = lineLength ??
-        (roadmapOrientation.isVertical ? size.width : size.height) +
-            (type.isSolid ? 0 : limitExpand);
+    final double limit =
+        length ?? (roadmapOrientation.isVertical ? size.width : size.height);
 
     if (roadmapOrientation.isVertical) {
       double startX = 0;
@@ -137,8 +130,8 @@ class StraightConnectedLine extends CustomPainter {
       const double y = 0;
 
       if (type.isSolid) {
-        canvas.drawLine(Offset(startX, y), Offset(limit + 5, y), paint);
-        startX = limit + 5;
+        canvas.drawLine(Offset(startX, y), Offset(limit, y), paint);
+        startX = limit;
       } else {
         while (startX < limit) {
           final double endX = startX + dashLength;
@@ -166,13 +159,13 @@ class StraightConnectedLine extends CustomPainter {
         canvas.drawLine(arrowTip, arrowBottom, paint);
       }
     } else {
-      double startY = horizontalY;
+      double startY = 0;
 
-      final double x = horizontalX;
+      const double x = 0;
 
       if (type.isSolid) {
-        canvas.drawLine(Offset(x, startY), Offset(x, limit + 7.5), paint);
-        startY = limit + 7.5;
+        canvas.drawLine(Offset(x, startY), Offset(x, limit), paint);
+        startY = limit;
       } else {
         while (startY < limit) {
           final double endY = startY + dashLength;

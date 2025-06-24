@@ -14,17 +14,6 @@ class DemoCustomRoadmap extends StatelessWidget {
         'Delivery successful.',
         time: DateTime(2025, 2, 1, 11, 30),
         isActivated: true,
-        extraValue: <Widget>[
-          InkWell(
-            onTap: () => log('View image -> clicked'),
-            child: const Text(
-              'View image.',
-              style: TextStyle(
-                color: Colors.blue,
-              ),
-            ),
-          )
-        ],
       ),
       StepValue(
         'Your order is being delivered to your address. Please await a phone call.',
@@ -49,6 +38,28 @@ class DemoCustomRoadmap extends StatelessWidget {
             Expanded(
               child: CustomRoadMap(
                 values: data,
+                extraWidgetBuilder: (context, index) {
+                  return index == 0
+                      ? <Widget>[
+                          InkWell(
+                            onTap: () => log('View image -> clicked'),
+                            child: const Text(
+                              'View image.',
+                              style: TextStyle(
+                                color: Colors.blue,
+                              ),
+                            ),
+                          )
+                        ]
+                      : [];
+                },
+                childMilestoneBuilder: (context, index) {
+                  return Icon(
+                    Icons.done,
+                    color: Colors.white,
+                    size: 15,
+                  );
+                },
               ),
             ),
           ],
