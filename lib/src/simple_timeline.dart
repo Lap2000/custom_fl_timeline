@@ -4,8 +4,8 @@ import 'model/model.dart';
 
 import 'widgets/widgets.dart';
 
-class RoadMap extends StatelessWidget {
-  const RoadMap({
+class SimpleTimeline extends StatelessWidget {
+  const SimpleTimeline({
     super.key,
     this.circleRadius = 25,
     required this.values,
@@ -16,7 +16,7 @@ class RoadMap extends StatelessWidget {
   });
 
   final double circleRadius;
-  final List<StepValue> values;
+  final List<TimelineMilestone> values;
   final RoadmapType roadmapType;
   final RoadMapOrientation roadmapOrientation;
   final double height;
@@ -106,7 +106,7 @@ class RoadMap extends StatelessWidget {
               (int i) => Positioned(
                 left: i == 0 ? 0 : (4 * circleRadius * i),
                 top: roadmapType.isCurve ? circleRadius * 2 : 0,
-                child: CustomStepRoadmap(
+                child: CustomCircleBox(
                   radius: circleRadius,
                   text: values[i].value,
                   filledColor: values[i].color,
@@ -119,7 +119,7 @@ class RoadMap extends StatelessWidget {
               (int i) => Positioned(
                 left: roadmapType.isCurve ? circleRadius * 2 : 0,
                 top: i == 0 ? 0 : (4 * circleRadius * i),
-                child: CustomStepRoadmap(
+                child: CustomCircleBox(
                   radius: circleRadius,
                   text: values[i].value,
                   filledColor: values[i].color,

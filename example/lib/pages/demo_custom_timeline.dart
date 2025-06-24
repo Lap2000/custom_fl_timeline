@@ -1,30 +1,31 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_roadmap/flutter_roadmap.dart';
+import 'package:flutter_timeline/flutter_timeline.dart';
 
-class DemoCustomRoadmap extends StatelessWidget {
-  const DemoCustomRoadmap({super.key});
+class DemoCustomTimeline extends StatelessWidget {
+  const DemoCustomTimeline({super.key});
 
   @override
   Widget build(BuildContext context) {
     /// Dummy
-    final data = <StepValue>[
-      StepValue(
+    final data = <TimelineMilestone>[
+      TimelineMilestone(
         'Delivery successful.',
         time: DateTime(2025, 2, 1, 11, 30),
         isActivated: true,
       ),
-      StepValue(
+      TimelineMilestone(
         'Your order is being delivered to your address. Please await a phone call.',
         time: DateTime(2025, 1, 31, 7, 30),
       ),
-      StepValue(
+      TimelineMilestone(
         'Your order has been picked up and is now being transported to the Shanghai international warehouse. Delivery time may be extended due to some customs clearance issues. We appreciate your understanding.',
         time: DateTime(2025, 1, 26, 9, 06),
       ),
-      StepValue('Waiting for pickup.', time: DateTime(2025, 1, 25, 16, 30)),
-      StepValue('Place an order.', time: DateTime(2025, 1, 22, 10, 30)),
+      TimelineMilestone('Waiting for pickup.',
+          time: DateTime(2025, 1, 25, 16, 30)),
+      TimelineMilestone('Place an order.', time: DateTime(2025, 1, 22, 10, 30)),
     ];
 
     return Scaffold(
@@ -36,7 +37,7 @@ class DemoCustomRoadmap extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: CustomRoadMap(
+              child: CustomTimeline(
                 values: data,
                 extraWidgetBuilder: (context, index) {
                   return index == 0

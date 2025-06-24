@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_roadmap/flutter_roadmap.dart';
+import 'package:flutter_timeline/flutter_timeline.dart';
 
-class DemoStraightRoadmap extends StatelessWidget {
-  const DemoStraightRoadmap({super.key});
+class DemoStraightTimeline extends StatelessWidget {
+  const DemoStraightTimeline({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +17,15 @@ class DemoStraightRoadmap extends StatelessWidget {
             children: <Widget>[
               Container(
                 color: Colors.purpleAccent,
-                child: RoadMap(
+                child: SimpleTimeline(
                   circleRadius: 30,
                   roadmapType: RoadmapType.straight,
-                  values: <StepValue>[
-                    StepValue('A', color: Colors.orangeAccent),
-                    StepValue('B', color: Colors.greenAccent),
-                    StepValue('C', color: Colors.yellowAccent),
-                    StepValue('D', color: Colors.redAccent),
-                    StepValue('E', color: Colors.blueAccent),
+                  values: <TimelineMilestone>[
+                    TimelineMilestone('A', color: Colors.orangeAccent),
+                    TimelineMilestone('B', color: Colors.greenAccent),
+                    TimelineMilestone('C', color: Colors.yellowAccent),
+                    TimelineMilestone('D', color: Colors.redAccent),
+                    TimelineMilestone('E', color: Colors.blueAccent),
                   ],
                 ),
               ),
@@ -33,16 +33,16 @@ class DemoStraightRoadmap extends StatelessWidget {
                 color: Colors.pinkAccent,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: RoadMap(
+                  child: SimpleTimeline(
                     circleRadius: 40,
                     roadmapType: RoadmapType.straight,
                     roadmapOrientation: RoadMapOrientation.vertical,
-                    values: <StepValue>[
-                      StepValue('A', color: Colors.orangeAccent),
-                      StepValue('B', color: Colors.greenAccent),
-                      StepValue('C', color: Colors.yellowAccent),
-                      StepValue('D', color: Colors.redAccent),
-                      StepValue('E', color: Colors.blueAccent),
+                    values: <TimelineMilestone>[
+                      TimelineMilestone('A', color: Colors.orangeAccent),
+                      TimelineMilestone('B', color: Colors.greenAccent),
+                      TimelineMilestone('C', color: Colors.yellowAccent),
+                      TimelineMilestone('D', color: Colors.redAccent),
+                      TimelineMilestone('E', color: Colors.blueAccent),
                     ],
                   ),
                 ),

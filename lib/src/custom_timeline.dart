@@ -22,8 +22,8 @@ typedef ChildBuilder = Widget Function(BuildContext context, int index);
 /// Ex: Text
 typedef DateTimeChildBuilder = Widget Function(BuildContext context, int index);
 
-class CustomRoadMap extends StatelessWidget {
-  const CustomRoadMap({
+class CustomTimeline extends StatelessWidget {
+  const CustomTimeline({
     super.key,
     this.circleRadius = 10,
     required this.values,
@@ -50,7 +50,7 @@ class CustomRoadMap extends StatelessWidget {
   final double circleRadius;
 
   /// values
-  final List<StepValue> values;
+  final List<TimelineMilestone> values;
 
   /// padding roadmap
   final EdgeInsets padding;

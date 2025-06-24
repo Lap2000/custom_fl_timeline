@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../flutter_roadmap.dart';
+import '../../flutter_timeline.dart';
 import 'base_widgets/base_widgets.dart';
 
 class CustomMilestone extends StatelessWidget {
@@ -29,7 +29,7 @@ class CustomMilestone extends StatelessWidget {
   }) : assert(flex.length == 2, 'List "flex" must contain exactly 2 elements');
 
   /// Item Model -> Value
-  final StepValue item;
+  final TimelineMilestone item;
 
   /// Widgets below item.value (ex: textbutton --> click to show something)
   final List<Widget> children;
@@ -130,39 +130,11 @@ class CustomMilestone extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 /// Circle Roadmap
-                CustomStepRoadmap(
+                CustomCircleBox(
                   radius: circleRadius,
                   filledColor: isActivated ? activatedColor : deactivatedColor,
-                  // pixelPadding: 0,
-                  // padding: EdgeInsets.only(
-                  //   top: max(
-                  //     0,
-                  //     15 -
-                  //         (circleRadius < 5
-                  //             ? max(8, circleRadius)
-                  //             : circleRadius),
-                  //   ),
-                  // ),
                   child: milestoneChild,
                 ),
-                // Container(
-                //   width: 15,
-                //   height: 15,
-                //   decoration: BoxDecoration(
-                //     color: Colors.blue,
-                //     shape: BoxShape.circle,
-                //     border: Border.all(
-                //       color: Colors.red,
-                //     ),
-                //   ),
-                //   child: const Center(
-                //     child: Icon(
-                //       Icons.done,
-                //       color: Colors.white,
-                //       size: 10,
-                //     ),
-                //   ),
-                // ),
 
                 /// if is the last, not show the line.
                 if (!circleAtTheEnd)

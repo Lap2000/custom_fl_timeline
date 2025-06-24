@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class StepValue {
-  StepValue(
+class TimelineMilestone {
+  TimelineMilestone(
     this.value, {
     this.color,
     this.time,

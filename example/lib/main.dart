@@ -1,6 +1,6 @@
-import 'package:example/pages/demo_curve_roadmap.dart';
-import 'package:example/pages/demo_custom_roadmap.dart';
-import 'package:example/pages/demo_straight_roadmap.dart';
+import 'package:example/pages/demo_curve_timeline.dart';
+import 'package:example/pages/demo_custom_timeline.dart';
+import 'package:example/pages/demo_straight_timeline.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,7 +44,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<dynamic>(
-                    builder: (_) => const DemoCurveRoadmap(),
+                    builder: (_) => const DemoCurveTimeline(),
                   ),
                 );
               },
@@ -54,7 +54,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<dynamic>(
-                    builder: (_) => const DemoStraightRoadmap(),
+                    builder: (_) => const DemoStraightTimeline(),
                   ),
                 );
               },
@@ -64,7 +64,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<dynamic>(
-                    builder: (_) => const DemoCustomRoadmap(),
+                    builder: (_) => const DemoCustomTimeline(),
                   ),
                 );
               },

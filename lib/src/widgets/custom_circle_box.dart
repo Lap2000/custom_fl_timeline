@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class CustomStepRoadmap extends StatelessWidget {
-  const CustomStepRoadmap({
+import 'base_widgets/one_line_text.dart';
+
+class CustomCircleBox extends StatelessWidget {
+  const CustomCircleBox({
     super.key,
     this.radius = 40,
     this.text,
@@ -28,13 +30,9 @@ class CustomStepRoadmap extends StatelessWidget {
         child: CustomPaint(
           painter: CirclePainter(radius: radius, filledColor: filledColor),
           child: child ??
-              FittedBox(
-                child: Text(
-                  text ?? '',
-                  style: textStyle,
-                  maxLines: 1,
-                  overflow: TextOverflow.clip,
-                ),
+              OneLineText(
+                text ?? '',
+                style: textStyle,
               ),
         ),
       ),

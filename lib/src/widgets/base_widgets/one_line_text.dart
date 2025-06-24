@@ -4,11 +4,13 @@ class OneLineText extends StatelessWidget {
   const OneLineText(
     this.value, {
     super.key,
-    required this.style,
+    this.style,
+    this.textAlign,
   });
 
   final String value;
-  final TextStyle style;
+  final TextStyle? style;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class OneLineText extends StatelessWidget {
         style: style,
         maxLines: 1,
         overflow: TextOverflow.visible,
-        textAlign: TextAlign.end,
+        textAlign: textAlign,
       ),
     );
   }
