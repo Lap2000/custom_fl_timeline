@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Roadmap Demo',
+      title: 'Timeline Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Roadmap Page'),
+      home: const MyHomePage(title: 'Flutter Demo Timeline Page'),
       locale: Locale('ja', 'JP'),
     );
   }
@@ -48,7 +48,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Curve Roadmap'),
+              child: const Text('Curve Timeline'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -58,7 +58,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Straight Roadmap'),
+              child: const Text('Straight Timeline'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -68,7 +68,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Custom Roadmap'),
+              child: const Text('Custom Timeline'),
             ),
           ],
         ),

@@ -1,5 +1,5 @@
-enum RoadMapOrientation { vertical, horizontal }
+enum TimelineOrientation { vertical, horizontal }
 
-extension RoadMapOrientationX on RoadMapOrientation {
-  bool get isVertical => this == RoadMapOrientation.vertical;
+extension TimelineOrientationX on TimelineOrientation {
+  bool get isVertical => this == TimelineOrientation.vertical;
 }

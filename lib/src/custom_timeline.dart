@@ -22,13 +22,16 @@ typedef ChildBuilder = Widget Function(BuildContext context, int index);
 /// Ex: Text
 typedef DateTimeChildBuilder = Widget Function(BuildContext context, int index);
 
+/// Border circle.
+typedef BorderCircleBuilder = Color? Function(BuildContext context, int index);
+
 class CustomTimeline extends StatelessWidget {
   const CustomTimeline({
     super.key,
     this.circleRadius = 10,
     required this.values,
     this.padding = const EdgeInsets.all(8.0),
-    this.connectedLineType = ConnectorType.solid,
+    this.connectorType = PainterType.solid,
     this.isShowDateTime = true,
     this.datetimeLocale,
     this.itemPadding = 20,
@@ -44,19 +47,22 @@ class CustomTimeline extends StatelessWidget {
     this.extraWidgetBuilder,
     this.childBuilder,
     this.dateTimeChildBuilder,
+    this.circleBorderWidth = 0,
+    this.circleBorderColor,
+    this.circle3D = false,
   });
 
-  /// circle roadmap radius
+  /// circle radius
   final double circleRadius;
 
   /// values
   final List<TimelineMilestone> values;
 
-  /// padding roadmap
+  /// padding timeline
   final EdgeInsets padding;
 
-  /// Connected Line Type (solid, dash)
-  final ConnectorType connectedLineType;
+  /// Connector Type (solid, dash)
+  final PainterType connectorType;
 
   /// Enable/Disable DateTime
   final bool isShowDateTime;
@@ -108,6 +114,15 @@ class CustomTimeline extends StatelessWidget {
   /// Manually custom
   final DateTimeChildBuilder? dateTimeChildBuilder;
 
+  /// Width of the circle border.
+  final double circleBorderWidth;
+
+  /// Color of the circle border.
+  final BorderCircleBuilder? circleBorderColor;
+
+  /// circle shader.
+  final bool circle3D;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -122,7 +137,7 @@ class CustomTimeline extends StatelessWidget {
                   item: values[index],
                   circleAtTheEnd: index == values.length - 1,
                   isActivated: values[index].isActivated,
-                  connectorType: ConnectorType.solid,
+                  connectorType: connectorType,
                   isShowDateTime: isShowDateTime,
                   datetimeLocale: datetimeLocale,
                   formattedStyle: formattedStyle,
@@ -135,6 +150,10 @@ class CustomTimeline extends StatelessWidget {
                   itemPadding: itemPadding,
                   linePadding: linePadding,
                   circleRadius: circleRadius,
+                  circleBorderWidth: circleBorderWidth,
+                  circle3D: circle3D,
+                  circleBorderColor:
+                      circleBorderColor?.call(context, index) ?? Colors.black,
                   milestoneChild: childMilestoneBuilder?.call(context, index),
                   children: extraWidgetBuilder?.call(context, index) ??
                       const <Widget>[],

@@ -7,8 +7,8 @@ import '../helper/helper.dart';
 class CurveConnector extends CustomPainter {
   const CurveConnector({
     this.radius = 25,
-    this.curveConnectedLineType = CurveConnectedLineType.left,
-    this.roadmapOrientation = RoadMapOrientation.horizontal,
+    this.curveConnectedLineType = CurveConnectorType.left,
+    this.timelineOrientation = TimelineOrientation.horizontal,
     this.color = Colors.black,
     this.strokeWidth = 2,
     this.circleDashGap = pi / 50,
@@ -16,8 +16,8 @@ class CurveConnector extends CustomPainter {
   });
 
   final double radius;
-  final CurveConnectedLineType curveConnectedLineType;
-  final RoadMapOrientation roadmapOrientation;
+  final CurveConnectorType curveConnectedLineType;
+  final TimelineOrientation timelineOrientation;
   final Color color;
   final double strokeWidth;
   final double circleDashGap;
@@ -32,7 +32,7 @@ class CurveConnector extends CustomPainter {
 
     final Offset center = Offset(size.width / 2, size.height / 2);
 
-    double startAngle = roadmapOrientation.isVertical
+    double startAngle = timelineOrientation.isVertical
         ? curveConnectedLineType.isTop
             ? pi
             : 0
@@ -95,23 +95,23 @@ class CurveConnector extends CustomPainter {
 
 class StraightConnector extends CustomPainter {
   const StraightConnector({
-    this.roadmapOrientation = RoadMapOrientation.horizontal,
+    this.timelineOrientation = TimelineOrientation.horizontal,
     this.color = Colors.black,
     this.strokeWidth = 2,
     this.dashGap = 5,
     this.dashLength = 5,
     this.hasArrow = true,
-    this.type = ConnectorType.solid,
+    this.type = PainterType.solid,
     this.length,
   });
 
-  final RoadMapOrientation roadmapOrientation;
+  final TimelineOrientation timelineOrientation;
   final Color color;
   final double strokeWidth;
   final double dashGap;
   final double dashLength;
   final bool hasArrow;
-  final ConnectorType type;
+  final PainterType type;
   final double? length;
 
   @override
@@ -122,9 +122,9 @@ class StraightConnector extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final double limit =
-        length ?? (roadmapOrientation.isVertical ? size.width : size.height);
+        length ?? (timelineOrientation.isVertical ? size.width : size.height);
 
-    if (roadmapOrientation.isVertical) {
+    if (timelineOrientation.isVertical) {
       double startX = 0;
 
       const double y = 0;

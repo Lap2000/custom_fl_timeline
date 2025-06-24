@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../flutter_timeline.dart';
+import '../../custom_fl_timeline.dart';
 import 'base_widgets/base_widgets.dart';
 
 class CustomMilestone extends StatelessWidget {
@@ -19,6 +19,9 @@ class CustomMilestone extends StatelessWidget {
     required this.flex,
     required this.textStyle,
     required this.datetimeTextStyle,
+    required this.circleBorderWidth,
+    required this.circleBorderColor,
+    required this.circle3D,
     this.datetimeLocale,
     this.children = const <Widget>[],
     this.circleAtTheEnd = false,
@@ -62,7 +65,7 @@ class CustomMilestone extends StatelessWidget {
   final double circleRadius;
 
   /// Connected Line Type (solid, dash)
-  final ConnectorType connectorType;
+  final PainterType connectorType;
 
   /// Flex (datetime - value)
   final List<int> flex;
@@ -87,6 +90,15 @@ class CustomMilestone extends StatelessWidget {
 
   /// Widget in the left of milestone.
   final Widget? datetimeChild;
+
+  /// Width of the circle border.
+  final double circleBorderWidth;
+
+  /// Color of the circle border.
+  final Color circleBorderColor;
+
+  /// circle shader.
+  final bool circle3D;
 
   @override
   Widget build(BuildContext context) {
@@ -129,10 +141,14 @@ class CustomMilestone extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: linePadding),
             child: Column(
               children: <Widget>[
-                /// Circle Roadmap
+                /// Circle Timeline
                 CustomCircleBox(
                   radius: circleRadius,
                   filledColor: isActivated ? activatedColor : deactivatedColor,
+                  painterType: connectorType,
+                  borderColor: circleBorderColor,
+                  borderWidth: circleBorderWidth,
+                  circle3D: circle3D,
                   child: milestoneChild,
                 ),
 

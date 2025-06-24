@@ -30,7 +30,7 @@ class DemoCustomTimeline extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo Custom Roadmap'),
+        title: const Text('Demo Custom Timeline'),
       ),
       body: SafeArea(
         child: Column(
@@ -39,6 +39,13 @@ class DemoCustomTimeline extends StatelessWidget {
             Expanded(
               child: CustomTimeline(
                 values: data,
+                circleRadius: 10,
+                itemPadding: 40,
+                connectorType: PainterType.solid,
+                // connectorType: PainterType.dash,
+                // circleBorderWidth: 2,
+                // circleBorderColor: (context, index) =>
+                //     index == 0 ? Colors.green : Colors.black,
                 extraWidgetBuilder: (context, index) {
                   return index == 0
                       ? <Widget>[

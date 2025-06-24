@@ -1,4 +1,3 @@
 export 'connector_type.dart';
-export 'curve_roadmap.dart';
 export 'orientation.dart';
-export 'roadmap_type.dart';
+export 'timeline_type.dart';

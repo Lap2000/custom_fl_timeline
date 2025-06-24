@@ -9,37 +9,46 @@ class SimpleTimeline extends StatelessWidget {
     super.key,
     this.circleRadius = 25,
     required this.values,
-    this.roadmapType = RoadmapType.curve,
-    this.roadmapOrientation = RoadMapOrientation.horizontal,
-    this.height = 0,
-    this.width = 0,
+    this.timelineType = TimelineType.curve,
+    this.timelineOrientation = TimelineOrientation.horizontal,
+    this.circleBorderWidth = 2,
+    this.circleBorderColor = Colors.black,
+    this.circle3D = false,
   });
 
   final double circleRadius;
   final List<TimelineMilestone> values;
-  final RoadmapType roadmapType;
-  final RoadMapOrientation roadmapOrientation;
-  final double height;
-  final double width;
+  final TimelineType timelineType;
+  final TimelineOrientation timelineOrientation;
+
+  /// Width of the circle border.
+  final double circleBorderWidth;
+
+  /// Color of the circle border.
+  final Color circleBorderColor;
+
+  /// circle shader.
+  final bool circle3D;
 
   @override
   Widget build(BuildContext context) {
-    final double roadmapHeight = roadmapOrientation.isVertical
-        ? roadmapType.isCurve
+    final double timelineHeight = timelineOrientation.isVertical
+        ? timelineType.isCurve
             ? circleRadius * 6
             : circleRadius * 2
-        : circleRadius * (values.length * 4);
-    final double roadmapWidth = roadmapOrientation.isVertical
-        ? circleRadius * (values.length * 4)
-        : roadmapType.isCurve
+        : circleRadius * (values.length * 4) - circleRadius * 2;
+    final double timelineWidth = timelineOrientation.isVertical
+        ? circleRadius * (values.length * 4) - circleRadius * 2
+        : timelineType.isCurve
             ? circleRadius * 6
             : circleRadius * 2;
-    return SizedBox(
-      height: roadmapHeight,
-      width: roadmapWidth,
+    return Container(
+      height: timelineHeight,
+      width: timelineWidth,
+      margin: const EdgeInsets.all(2),
       child: Stack(
         children: <Widget>[
-          if (roadmapType.isCurve && roadmapOrientation.isVertical)
+          if (timelineType.isCurve && timelineOrientation.isVertical)
             ...List<Widget>.generate(
               values.length - 1,
               (int i) => Positioned(
@@ -48,15 +57,15 @@ class SimpleTimeline extends StatelessWidget {
                 child: CustomPaint(
                   painter: CurveConnector(
                     radius: circleRadius * 2,
-                    roadmapOrientation: roadmapOrientation,
+                    timelineOrientation: timelineOrientation,
                     curveConnectedLineType: i.isEven
-                        ? CurveConnectedLineType.top
-                        : CurveConnectedLineType.bottom,
+                        ? CurveConnectorType.top
+                        : CurveConnectorType.bottom,
                   ),
                 ),
               ),
             )
-          else if (roadmapOrientation.isVertical)
+          else if (timelineOrientation.isVertical)
             ...List<Widget>.generate(
               values.length - 1,
               (int i) => Positioned(
@@ -65,13 +74,13 @@ class SimpleTimeline extends StatelessWidget {
                 child: CustomPaint(
                   painter: StraightConnector(
                     length: circleRadius * 2,
-                    roadmapOrientation: roadmapOrientation,
+                    timelineOrientation: timelineOrientation,
                     hasArrow: false,
                   ),
                 ),
               ),
             )
-          else if (roadmapType.isCurve)
+          else if (timelineType.isCurve)
             ...List<Widget>.generate(
               values.length - 1,
               (int i) => Positioned(
@@ -81,8 +90,8 @@ class SimpleTimeline extends StatelessWidget {
                   painter: CurveConnector(
                     radius: circleRadius * 2,
                     curveConnectedLineType: i.isEven
-                        ? CurveConnectedLineType.left
-                        : CurveConnectedLineType.right,
+                        ? CurveConnectorType.left
+                        : CurveConnectorType.right,
                   ),
                 ),
               ),
@@ -100,16 +109,20 @@ class SimpleTimeline extends StatelessWidget {
                 ),
               ),
             ),
-          if (roadmapOrientation.isVertical)
+          if (timelineOrientation.isVertical)
             ...List<Widget>.generate(
               values.length,
               (int i) => Positioned(
                 left: i == 0 ? 0 : (4 * circleRadius * i),
-                top: roadmapType.isCurve ? circleRadius * 2 : 0,
+                top: timelineType.isCurve ? circleRadius * 2 : 0,
                 child: CustomCircleBox(
                   radius: circleRadius,
                   text: values[i].value,
                   filledColor: values[i].color,
+                  painterType: PainterType.solid,
+                  borderColor: circleBorderColor,
+                  borderWidth: circleBorderWidth,
+                  circle3D: circle3D,
                 ),
               ),
             )
@@ -117,12 +130,16 @@ class SimpleTimeline extends StatelessWidget {
             ...List<Widget>.generate(
               values.length,
               (int i) => Positioned(
-                left: roadmapType.isCurve ? circleRadius * 2 : 0,
+                left: timelineType.isCurve ? circleRadius * 2 : 0,
                 top: i == 0 ? 0 : (4 * circleRadius * i),
                 child: CustomCircleBox(
                   radius: circleRadius,
                   text: values[i].value,
                   filledColor: values[i].color,
+                  painterType: PainterType.dash,
+                  borderColor: circleBorderColor,
+                  borderWidth: circleBorderWidth,
+                  circle3D: circle3D,
                 ),
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_timeline/flutter_timeline.dart';
+import 'package:custom_fl_timeline/custom_fl_timeline.dart';
 
 class DemoStraightTimeline extends StatelessWidget {
   const DemoStraightTimeline({super.key});
@@ -8,7 +8,7 @@ class DemoStraightTimeline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Demo Straight Roadmap'),
+        title: const Text('Demo Straight Timeline'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -19,7 +19,7 @@ class DemoStraightTimeline extends StatelessWidget {
                 color: Colors.purpleAccent,
                 child: SimpleTimeline(
                   circleRadius: 30,
-                  roadmapType: RoadmapType.straight,
+                  timelineType: TimelineType.straight,
                   values: <TimelineMilestone>[
                     TimelineMilestone('A', color: Colors.orangeAccent),
                     TimelineMilestone('B', color: Colors.greenAccent),
@@ -35,8 +35,8 @@ class DemoStraightTimeline extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: SimpleTimeline(
                     circleRadius: 40,
-                    roadmapType: RoadmapType.straight,
-                    roadmapOrientation: RoadMapOrientation.vertical,
+                    timelineType: TimelineType.straight,
+                    timelineOrientation: TimelineOrientation.vertical,
                     values: <TimelineMilestone>[
                       TimelineMilestone('A', color: Colors.orangeAccent),
                       TimelineMilestone('B', color: Colors.greenAccent),
