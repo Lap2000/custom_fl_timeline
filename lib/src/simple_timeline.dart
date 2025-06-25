@@ -16,9 +16,16 @@ class SimpleTimeline extends StatelessWidget {
     this.circle3D = false,
   });
 
+  /// circle radius.
   final double circleRadius;
+
+  /// Main value.
   final List<TimelineMilestone> values;
+
+  /// Timeline Type (curve, straight).
   final TimelineType timelineType;
+
+  /// Timeline Orientation.
   final TimelineOrientation timelineOrientation;
 
   /// Width of the circle border.
