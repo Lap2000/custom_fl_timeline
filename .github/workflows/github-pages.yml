@@ -18,7 +18,7 @@ jobs:
           echo "USING_CUSTOM_FL_TIMELINE_VERSION=$VERSION" >> $GITHUB_ENV
       - run: flutter config --enable-web
         working-directory: example
-      - run: flutter build web --release --wasm --base-href=/ --dart-define="USING_CUSTOM_FL_TIMELINE_VERSION=${{ env.USING_CUSTOM_FL_TIMELINE_VERSION }}"
+      - run: flutter build web --release --wasm --base-href=/custom_fl_timeline/ --dart-define="USING_CUSTOM_FL_TIMELINE_VERSION=${{ env.USING_CUSTOM_FL_TIMELINE_VERSION }}"
         working-directory: example
       - run: git config user.name github-actions
         working-directory: example
