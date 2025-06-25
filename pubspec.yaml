@@ -1,7 +1,10 @@
 name: custom_fl_timeline
 description: "A new Flutter package project."
 version: 1.0.0
-homepage:
+homepage: https://github.com/Lap2000/custom_fl_timeline
+issue_tracker: https://github.com/Lap2000/custom_fl_timeline/issues
+repository: https://github.com/Lap2000/custom_fl_timeline
+documentation: https://github.com/Lap2000/custom_fl_timeline
 
 environment:
   sdk: ^3.6.0
