@@ -103,15 +103,14 @@ class CustomMilestone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String formatted = item.time != null
-        ? DateFormat(formattedStyle, datetimeLocale)
-            .format(item.time ?? DateTime(0))
+        ? DateFormat(formattedStyle, datetimeLocale).format(item.time ?? DateTime(0))
         : '';
 
-    final TextStyle valueStyle = textStyle.copyWith(
-        color: isActivated ? activatedColor : deactivatedColor);
+    final TextStyle valueStyle =
+        textStyle.copyWith(color: isActivated ? activatedColor : deactivatedColor);
 
-    final TextStyle datetimeStrStyle = datetimeTextStyle.copyWith(
-        color: isActivated ? Colors.black : deactivatedColor);
+    final TextStyle datetimeStrStyle =
+        datetimeTextStyle.copyWith(color: isActivated ? Colors.black : deactivatedColor);
 
     return IntrinsicHeight(
       child: Row(

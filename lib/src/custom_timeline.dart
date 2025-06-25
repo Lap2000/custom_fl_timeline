@@ -6,13 +6,11 @@ import 'widgets/widgets.dart';
 
 /// Widget inside milestone.
 /// Ex: Done icon
-typedef ChildMilestoneBuilder = Widget? Function(
-    BuildContext context, int index);
+typedef ChildMilestoneBuilder = Widget? Function(BuildContext context, int index);
 
 /// Widget below main value.
 /// Ex: TextButton -> View Image
-typedef ExtraWidgetBuilder = List<Widget> Function(
-    BuildContext context, int index);
+typedef ExtraWidgetBuilder = List<Widget> Function(BuildContext context, int index);
 
 /// Widget main value.
 /// Ex: Text
@@ -152,11 +150,9 @@ class CustomTimeline extends StatelessWidget {
                   circleRadius: circleRadius,
                   circleBorderWidth: circleBorderWidth,
                   circle3D: circle3D,
-                  circleBorderColor:
-                      circleBorderColor?.call(context, index) ?? Colors.black,
+                  circleBorderColor: circleBorderColor?.call(context, index) ?? Colors.black,
                   milestoneChild: childMilestoneBuilder?.call(context, index),
-                  children: extraWidgetBuilder?.call(context, index) ??
-                      const <Widget>[],
+                  children: extraWidgetBuilder?.call(context, index) ?? const <Widget>[],
                   child: childBuilder?.call(context, index),
                   datetimeChild: dateTimeChildBuilder?.call(context, index),
                 );

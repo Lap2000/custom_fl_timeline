@@ -65,9 +65,8 @@ class SimpleTimeline extends StatelessWidget {
                   painter: CurveConnector(
                     radius: circleRadius * 2,
                     timelineOrientation: timelineOrientation,
-                    curveConnectedLineType: i.isEven
-                        ? CurveConnectorType.top
-                        : CurveConnectorType.bottom,
+                    curveConnectedLineType:
+                        i.isEven ? CurveConnectorType.top : CurveConnectorType.bottom,
                   ),
                 ),
               ),
@@ -96,9 +95,8 @@ class SimpleTimeline extends StatelessWidget {
                 child: CustomPaint(
                   painter: CurveConnector(
                     radius: circleRadius * 2,
-                    curveConnectedLineType: i.isEven
-                        ? CurveConnectorType.left
-                        : CurveConnectorType.right,
+                    curveConnectedLineType:
+                        i.isEven ? CurveConnectorType.left : CurveConnectorType.right,
                   ),
                 ),
               ),

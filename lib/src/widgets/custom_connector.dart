@@ -121,8 +121,7 @@ class StraightConnector extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    final double limit =
-        length ?? (timelineOrientation.isVertical ? size.width : size.height);
+    final double limit = length ?? (timelineOrientation.isVertical ? size.width : size.height);
 
     if (timelineOrientation.isVertical) {
       double startX = 0;
