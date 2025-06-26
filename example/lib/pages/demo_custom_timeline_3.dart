@@ -4,8 +4,8 @@ import 'package:example/mocks/custom_timeline_data.dart';
 import 'package:flutter/material.dart';
 import 'package:custom_fl_timeline/custom_fl_timeline.dart';
 
-class DemoCustomTimeline extends StatelessWidget {
-  const DemoCustomTimeline({super.key});
+class DemoCustomTimeline3 extends StatelessWidget {
+  const DemoCustomTimeline3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +14,7 @@ class DemoCustomTimeline extends StatelessWidget {
       circleRadius: 10,
       itemPadding: 40,
       connectorType: PainterType.solid,
-      // connectorType: PainterType.dash,
-      // circleBorderWidth: 2,
-      // circleBorderColor: (context, index) =>
-      //     index == 0 ? Colors.green : Colors.black,
+      circle3D: true,
       extraWidgetBuilder: (context, index) {
         return index == 0
             ? <Widget>[
@@ -32,13 +29,6 @@ class DemoCustomTimeline extends StatelessWidget {
                 )
               ]
             : [];
-      },
-      childMilestoneBuilder: (context, index) {
-        return Icon(
-          Icons.done,
-          color: Colors.white,
-          size: 15,
-        );
       },
     );
   }

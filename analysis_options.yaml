@@ -14,6 +14,7 @@ analyzer:
       # Ignore protoc generated files
     - "dev/conductor/lib/proto/*"
     - "engine/**"
+    - ".github/workflows/**"
 
 formatter:
   page_width: 100

@@ -40,6 +40,10 @@ Now in your Dart code, you can use:
 import 'package:custom_fl_timeline/custom_fl_timeline.dart';
 ```
 
+# Demo
+
+See full [Demo](https://lap2000.github.io/custom_fl_timeline/)
+
 # Documentation
 
 See full [documentation](https://github.com/Lap2000/custom_fl_timeline)
